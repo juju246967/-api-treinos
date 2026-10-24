@@ -1,44 +1,26 @@
-
-### 1. Listar todos os treinos
 GET http://localhost:3000/treinos
 
-### 2. Cadastrar treino com observacao
 POST http://localhost:3000/treinos
 Content-Type: application/json
 
 {
   "nome": "Treino de pernas",
-  "duracao": 60,
-  "observacao": "Aumentar a carga aos poucos"
+  "duracao": 60
 }
-
-### 3. Cadastrar treino sem observacao
+### Cadastrar treino no SQLite
 POST http://localhost:3000/treinos
 Content-Type: application/json
 
 {
-  "nome": "Treino de braços",
-  "duracao": 30
+  "nome": "Treino de pernas",
+  "duracao": 60
 }
 
-### 4. Filtrar treinos com duracao minima de 45
-GET http://localhost:3000/treinos?minimo=45
+### Listar treinos
+GET http://localhost:3000/treinos
 
-### 5. Buscar treino com ID 1
-GET http://localhost:3000/treinos/1
+### Contar treinos
+GET http://localhost:3000/treinos/total
 
-### 6. Ver resumo dos treinos
+### Resumo dos treinos
 GET http://localhost:3000/treinos/resumo
-
-### 7. Atualizar treino com ID 1
-PUT http://localhost:3000/treinos/1
-Content-Type: application/json
-
-{
-  "nome": "Treino de pernas atualizado",
-  "duracao": 75,
-  "observacao": "Treino atualizado"
-}
-
-### 8. Excluir treino com ID 1
-DELETE http://localhost:3000/treinos/1

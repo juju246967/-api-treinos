@@ -1,40 +1,123 @@
-const db = require('../banco.js');
+GET http://localhost:3000/treinos
 
-function listarTodos() {
-    return db.prepare('SELECT * FROM treinos').all();
+GET http://localhost:3000/treinos/1
+
+GET http://localhost:3000/treinos/9999
+
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "usuario": "julio",
+  "senha": "senha-errada"
 }
 
-function buscarPorId(id) {
-    return db.prepare('SELECT * FROM treinos WHERE id = ?').get(id);
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "usuario": "naoexiste",
+  "senha": "5130"
 }
 
-function criar(nome, duracao) {
-    const resultado = db
-        .prepare('INSERT INTO treinos (nome, duracao) VALUES (?, ?)')
-        .run(nome, duracao);
+GET http://localhost:3000/perfil
 
-    return buscarPorId(resultado.lastInsertRowid);
+POST http://localhost:3000/treinos
+Content-Type: application/json
+
+{
+  "nome": "Treino bloqueado",
+  "duracao": 30
 }
 
-function atualizar(id, nome, duracao) {
-    db.prepare('UPDATE treinos SET nome = ?, duracao = ? WHERE id = ?')
-        .run(nome, duracao, id);
+POST http://localhost:3000/login
+Content-Type: application/json
 
-    return buscarPorId(id);
+{
+  "usuario": "julio",
+  "senha": "5130"
 }
 
-function remover(id) {
-    const resultado = db
-        .prepare('DELETE FROM treinos WHERE id = ?')
-        .run(id);
+GET http://localhost:3000/perfil
 
-    return resultado.changes > 0;
+POST http://localhost:3000/treinos
+Content-Type: application/json
+
+{
+  "nome": "Treino de costas",
+  "duracao": 45
 }
 
-module.exports = {
-    listarTodos,
-    buscarPorId,
-    criar,
-    atualizar,
-    remover
-};
+POST http://localhost:3000/treinos
+Content-Type: application/json
+
+{
+  "nome": "",
+  "duracao": 30
+}
+
+POST http://localhost:3000/treinos
+Content-Type: application/json
+
+{
+  "nome": "Treino invalido",
+  "duracao": 0
+}
+
+POST http://localhost:3000/treinos
+Content-Type: application/json
+
+{
+  "nome": "Treino muito longo",
+  "duracao": 200
+}
+
+PUT http://localhost:3000/treinos/1
+Content-Type: application/json
+
+{
+  "nome": "Treino atualizado",
+  "duracao": 50
+}
+
+PUT http://localhost:3000/treinos/9999
+Content-Type: application/json
+
+{
+  "nome": "Treino inexistente",
+  "duracao": 30
+}
+
+DELETE http://localhost:3000/treinos/9999
+
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "usuario": "aluno",
+  "senha": "senha"
+}
+
+GET http://localhost:3000/perfil
+
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "usuario": "julio",
+  "senha": "5130"
+}
+
+GET http://localhost:3000/perfil
+
+POST http://localhost:3000/logout
+
+GET http://localhost:3000/perfil
+
+POST http://localhost:3000/treinos
+Content-Type: application/json
+
+{
+  "nome": "Treino bloqueado depois do logout",
+  "duracao": 30
+}

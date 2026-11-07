@@ -1,3 +1,4 @@
+
 const service = require('../services/authService.js');
 const sessoes = require('../sessoes.js');
 const usuariosRepository = require('../repositories/usuariosRepository.js');
@@ -15,11 +16,12 @@ function lerCookie(req, nome) {
     return null;
 }
 
-function login(req, res) {
+async function login(req, res) {
     const corpo = req.body ?? {};
     const usuario = typeof corpo.usuario === 'string' ? corpo.usuario.trim() : '';
     const senha = typeof corpo.senha === 'string' ? corpo.senha : '';
-    const resultado = service.login(usuario, senha);
+
+    const resultado = await service.login(usuario, senha);
 
     if (resultado.invalido === true) {
         return res.status(401).json({ erro: 'Usuario ou senha invalidos.' });
@@ -27,6 +29,7 @@ function login(req, res) {
 
     const token = sessoes.criar(resultado.usuario.id);
     res.cookie('sid', token, { httpOnly: true });
+
     return res.status(200).json(resultado.usuario);
 }
 
@@ -42,6 +45,7 @@ function usuarioDaRequisicao(req) {
 
 function perfil(req, res) {
     const dono = usuarioDaRequisicao(req);
+
     if (dono === null) {
         return res.status(401).json({ erro: 'Faca login primeiro.' });
     }
@@ -52,15 +56,18 @@ function perfil(req, res) {
 function logout(req, res) {
     const token = lerCookie(req, 'sid');
     if (token !== null) sessoes.encerrar(token);
+
     res.clearCookie('sid');
     return res.status(204).end();
 }
 
 function exigirLogin(req, res, next) {
     const dono = usuarioDaRequisicao(req);
+
     if (dono === null) {
         return res.status(401).json({ erro: 'Faca login primeiro.' });
     }
+
     req.usuario = dono;
     return next();
 }

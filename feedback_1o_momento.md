@@ -1,0 +1,1 @@
+Julio, tua nota de repositório foi 1,7 de 2,5. As aulas 3 e 4 foram enviadas com uma hora de diferença, em 24/10, e as aulas 5 e 6 só em novembro, em poucos commits grandes, sem histórico do trabalho ao longo das aulas. Por isso a nota foi metade pela entrega e metade pelo histórico de commits e pelas estruturas usadas. Se tiver dúvida, fala na próxima aula.

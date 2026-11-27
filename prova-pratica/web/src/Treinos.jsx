@@ -147,6 +147,10 @@ export default function Treinos({ onSessaoExpirada }) {
             o texto "Nenhum treino ainda. Cadastre o primeiro acima."
             (className="suave"). */}
 
+        {!carregando && treinos.length === 0 && (
+          <p className="suave">Nenhum treino ainda. Cadastre o primeiro acima.</p>
+        )}
+
         {/* TAREFA 8: a lista. Use treinos.map(...) para gerar um
             <CartaoTreino /> por treino, com key={t.id}, passando as props
             treino, onConcluir={concluir} e onApagar={apagar}. */}

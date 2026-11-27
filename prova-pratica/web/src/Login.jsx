@@ -16,6 +16,8 @@ export default function Login({ onEntrar }) {
   //         e a senha precisa ter pelo menos 4 caracteres.
   // ---------------------------------------------------------------
   function validar() {
+    if (usuario.trim() === '') return 'Informe o usuário.';
+    if (senha.length < 4) return 'A senha precisa ter pelo menos 4 caracteres.';
     return '';
   }
 

@@ -80,7 +80,7 @@ export default function Login({ onEntrar }) {
           feito, o que voce digita nao chega no estado e o login falha. */}
       <div className="campo">
         <label htmlFor="usuario">Usuário</label>
-        <input id="usuario" autoComplete="username" />
+        <input id="usuario" autoComplete="username" value={usuario} onChange={(evento) => setUsuario(evento.target.value)} />
       </div>
 
       <div className="campo">
@@ -88,6 +88,8 @@ export default function Login({ onEntrar }) {
         <input
           id="senha"
           type="password"
+          value={senha}
+          onChange={(evento) => setSenha(evento.target.value)}
           autoComplete={modo === 'entrar' ? 'current-password' : 'new-password'}
         />
       </div>

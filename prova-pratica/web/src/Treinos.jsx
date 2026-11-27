@@ -100,11 +100,16 @@ export default function Treinos({ onSessaoExpirada }) {
         <div className="linha-form">
           <div>
             <label htmlFor="nome">Nome</label>
-            <input id="nome" />
+            <input id="nome" value={nome} onChange={(evento) => setNome(evento.target.value)} />
           </div>
           <div>
             <label htmlFor="duracao">Duração (min)</label>
-            <input id="duracao" type="number" />
+            <input
+              id="duracao"
+              type="number"
+              value={duracao}
+              onChange={(evento) => setDuracao(evento.target.value)}
+            />
           </div>
           <button type="submit">Adicionar</button>
         </div>

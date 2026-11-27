@@ -88,6 +88,17 @@ export default function Treinos({ onSessaoExpirada }) {
   // ---------------------------------------------------------------
   function aoEnviar(evento) {
     evento.preventDefault();
+    if (nome.trim() === '') {
+      setErro('Informe o nome do treino.');
+      return;
+    }
+
+    const minutos = Number(duracao);
+    if (!Number.isInteger(minutos) || minutos < 1 || minutos > 180) {
+      setErro('A duração precisa ser um número inteiro de 1 a 180 minutos.');
+      return;
+    }
+
     enviarNovoTreino();
   }
 
@@ -95,7 +106,7 @@ export default function Treinos({ onSessaoExpirada }) {
     <>
       {/* TAREFA 5: deixe os dois campos CONTROLADOS (value + onChange,
           igual ao Login). Os estados nome e duracao ja existem la em cima. */}
-      <form className="cartao" onSubmit={aoEnviar}>
+      <form className="cartao" onSubmit={aoEnviar} noValidate>
         <h2>Novo treino</h2>
         <div className="linha-form">
           <div>

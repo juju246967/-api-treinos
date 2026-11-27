@@ -154,7 +154,16 @@ export default function Treinos({ onSessaoExpirada }) {
         {/* TAREFA 8: a lista. Use treinos.map(...) para gerar um
             <CartaoTreino /> por treino, com key={t.id}, passando as props
             treino, onConcluir={concluir} e onApagar={apagar}. */}
-        <ul className="lista"></ul>
+        <ul className="lista">
+          {treinos.map((treino) => (
+            <CartaoTreino
+              key={treino.id}
+              treino={treino}
+              onConcluir={concluir}
+              onApagar={apagar}
+            />
+          ))}
+        </ul>
       </section>
     </>
   );
